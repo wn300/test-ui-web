@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+body{
+    margin-top: 60px !important;
+    background-color: rgb(219, 218, 218) !important;
+}
+
+h1,h2,h3,h4{
+    
+}
