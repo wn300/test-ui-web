@@ -1,8 +1,45 @@
+@font-face {
+    font-family: 'Kaushan Script';
+    font-style: normal;
+    font-weight: 400;
+    src: local('☺'),
+        url("../fonts/Kaushan+Script_400_normal.woff") format('woff'), 
+        url("../fonts/Kaushan+Script_400_normal.ttf") format('truetype'), 
+        url("../fonts/Kaushan+Script_400_normal.svg#Kaushan+Script_400_normal") format('svg'); 
+  }
+
 body{
     margin-top: 60px !important;
-    background-color: rgb(219, 218, 218) !important;
+    background-color: #263238 !important;
 }
 
-h1,h2,h3,h4{
-    
+.text{
+    color: #FFFFFF !important;   
+    font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive !important;   
+}
+
+    .text, .title{
+        text-shadow: 1px 1px 2px #164EC9, 0 0 25px #FFFFFF, 0 0 5px #4DE4FF !important;
+        font-size: 80px;
+    }
+    .title-nav{    
+        font-size: 30px !important;
+    }
+
+.bg-foodPrimary {
+    background-color: #FFC107!important;
+}
+
+a {
+    text-shadow: 1px 0px 1px rgb(181, 197, 233), 0 0 25px #FFFFFF, 0 0 5px #4DE4FF !important;
+    text-decoration: none!important;
+}
+
+.navbar-toggler {
+    padding: 0.90rem .75rem!important;
+}
+
+.color-icon-toogler{
+    text-shadow: 1px 1px 2px #164EC9, 0 0 25px #FFFFFF, 0 0 5px #4DE4FF !important;
+    color:#FFFFFF
 }
