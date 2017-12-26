@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { HeadComponent } from './head/head.component';
+import { ShopFiltersComponent } from './shop-filters/shop-filters.component';
 
 @NgModule({
   imports: [
@@ -8,9 +10,11 @@ import { HeadComponent } from './head/head.component';
   ],
   declarations: [
     HeadComponent,
+    ShopFiltersComponent
   ],
   exports: [
-    HeadComponent
+    HeadComponent,
+    ShopFiltersComponent
   ]
 })
 export class ComponentsModule { }

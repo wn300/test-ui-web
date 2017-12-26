@@ -9,8 +9,8 @@
   }
 
 body{
-    margin-top: 60px !important;
-    background-color: #263238 !important;
+    margin-top: 73px !important;
+    background-color: #FFF8E1 !important;
 }
 
 .text{
@@ -39,7 +39,20 @@ a {
     padding: 0.90rem .75rem!important;
 }
 
-.color-icon-toogler{
+.shop-text, .color-icon-toogler{
     text-shadow: 1px 1px 2px #164EC9, 0 0 25px #FFFFFF, 0 0 5px #4DE4FF !important;
-    color:#FFFFFF
+    color:#FFFFFF !important;
+    cursor: pointer;
+}
+
+    .shop-text:hover {
+        text-shadow: 1px 1px 2px #164EC9, 0 0 25px #FFFFFF, 0 0 5px #4DE4FF !important;
+        color:#4DE4FF !important;
+        cursor: pointer;
+    }
+
+.shop-shadow{
+    -webkit-box-shadow: -2px 5px 20px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -2px 5px 20px 0px rgba(0,0,0,0.75);
+    box-shadow: -2px 5px 20px 0px rgba(0,0,0,0.75);
 }
