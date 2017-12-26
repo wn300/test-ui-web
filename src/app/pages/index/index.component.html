@@ -9,10 +9,10 @@
           <div class="col-12 col-md-4">
             <div class="form-group">
               <label for="exampleSelect1">Categorias</label>
-              <select class="form-control" [(ngModel)]="categoire" (change)="changeCategories()">
+              <select class="form-control" [(ngModel)]="category" (change)="changeCategories()">
                 <option value="">Todas</option>
-                <option [ngValue]="categorieSelect.id" *ngFor="let categorieSelect of categoiresSelect">
-                  {{categorieSelect.name}}
+                <option [ngValue]="categorySelect.id" *ngFor="let categorySelect of categoiresSelect">
+                  {{categorySelect.name}}
                 </option>
               </select>
             </div>
@@ -20,7 +20,7 @@
           <div class="col-12 col-md-4">
             <div class="form-group">
               <label for="exampleSelect1">Estado</label>
-              <select class="form-control" [(ngModel)]="estado" (change)="changeEstado()">
+              <select class="form-control" [(ngModel)]="state" (change)="changeEstado()">
                 <option value="">Todos</option>
                 <option [ngValue]="1">Disponibles</option>
                 <option [ngValue]="2">Agotados</option>
@@ -31,7 +31,7 @@
           <div class="col-12 col-md-4">
             <div class="form-group">
               <label for="exampleSelect1">Productos</label>
-              <select class="form-control" [(ngModel)]="producto">
+              <select class="form-control" [(ngModel)]="product">
                 <option value="">Todos</option>
                 <option [ngValue]="productSelect.id" *ngFor="let productSelect of productsSelect">
                     {{productSelect.name}}

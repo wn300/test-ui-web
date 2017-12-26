@@ -12,9 +12,9 @@ export class IndexComponent implements OnInit {
   public categoiresSelect: Categories[] = [];
   public productsSelect: Products[] = [];
 
-  categoire: String = '';
-  estado: String = '';
-  producto: String = '';
+  category: String = '';
+  state: String = '';
+  product: String = '';
   path: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private serviceProducts: ShopProductsService) { }
@@ -32,36 +32,36 @@ export class IndexComponent implements OnInit {
   }
 
   search() {
-    this.router.navigate(['/Shop-Mosaic', this.categoire, this.estado, this.producto]);
+    this.router.navigate(['/Shop-Mosaic', this.category, this.state, this.product]);
   }
 
   changeCategories() {
-    if (this.categoire === '' && this.estado === '') {
+    if (this.category === '' && this.state === '') {
       this.getAllProducts();
     }
-    if (this.categoire === '' && this.estado !== '') {
+    if (this.category === '' && this.state !== '') {
       this.changeEstado();
     }
-    if (this.categoire !== '' && this.estado === '') {
-      this.serviceProducts.getProductsForCategorie(this.categoire).subscribe((data) => { this.productsSelect = data; });
+    if (this.category !== '' && this.state === '') {
+      this.serviceProducts.getProductsByCategory(this.category).subscribe((data) => { this.productsSelect = data; });
     }
-    if (this.categoire !== '' && this.estado !== '') {
-      this.getProductsForCategorieAndEstate(this.categoire, this.estado);
+    if (this.category !== '' && this.state !== '') {
+      this.getProductsForCategoryAndState(this.category, this.state);
     }
   }
 
   changeEstado() {
-    if (this.estado === '' && this.categoire === '') {
+    if (this.state === '' && this.category === '') {
       this.getAllProducts();
     }
-    if (this.estado === '' && this.categoire !== '') {
+    if (this.state === '' && this.category !== '') {
       this.changeCategories();
     }
-    if (this.estado !== '' && this.categoire === '') {
-      this.serviceProducts.getProductsForEstate(this.estado).subscribe((data) => { this.productsSelect = data; });
+    if (this.state !== '' && this.category === '') {
+      this.serviceProducts.getProductsByState(this.state).subscribe((data) => { this.productsSelect = data; });
     }
-    if (this.estado !== '' && this.categoire !== '') {
-      this.getProductsForCategorieAndEstate(this.categoire, this.estado);
+    if (this.state !== '' && this.category !== '') {
+      this.getProductsForCategoryAndState(this.category, this.state);
     }
   }
 
@@ -71,8 +71,8 @@ export class IndexComponent implements OnInit {
   private getAllProducts() {
     this.serviceProducts.getAllProducts().subscribe((data) => { this.productsSelect = data; });
   }
-  private getProductsForCategorieAndEstate(categorieSelected: String, estate: String) {
-    this.serviceProducts.getProductsForCategorieAndState(categorieSelected, estate).subscribe((data) => { this.productsSelect = data; });
+  private getProductsForCategoryAndState(categorySelected: String, state: String) {
+    this.serviceProducts.getProductsByCategoryAndState(categorySelected, state).subscribe((data) => { this.productsSelect = data; });
   }
 
 }

@@ -21,41 +21,46 @@ export class ShopProductsService {
       .map((data: any) => data.products);
   }
 
-  getProductsForCategorie(categorieSelected: String): Observable<any> {
+  getProductsByProduct(productSelected: String): Observable<any> {
     return this.http.get(environment.productsEnvoriment)
-      .map((data: any) => data.products.filter((products: any) => products.categories.indexOf(categorieSelected) >= 0));
+      .map((data: any) => data.products.filter((product) => product.id.toString() === productSelected));
   }
 
-  getProductsForEstate(estate: String): Observable<any> {
-    if (estate.toString() === '1') {
+  getProductsByCategory(categorySelected: String): Observable<any> {
+    return this.http.get(environment.productsEnvoriment)
+      .map((data: any) => data.products.filter((products: any) => products.categories.toString().indexOf(categorySelected) >= 0));
+  }
+
+  getProductsByState(state: String): Observable<any> {
+    if (state.toString() === '1') {
       return this.http.get(environment.productsEnvoriment)
         .map((data: any) => data.products.filter((product) => product.available === true));
     }
-    if (estate.toString() === '2') {
+    if (state.toString() === '2') {
       return this.http.get(environment.productsEnvoriment)
         .map((data: any) => data.products.filter((product) => product.available === false));
     }
-    if (estate.toString() === '3') {
+    if (state.toString() === '3') {
       return this.http.get(environment.productsEnvoriment)
         .map((data: any) => data.products.filter((product) => product.bestSeller === true));
     }
   }
 
-  getProductsForCategorieAndState(categorieSelected: String, estate: String) {
-    if (estate.toString() === '1') {
+  getProductsByCategoryAndState(categorySelected: String, state: String) {
+    if (state.toString() === '1') {
       return this.http.get(environment.productsEnvoriment)
         // tslint:disable-next-line:max-line-length
-        .map((data: any) => data.products.filter((product) => product.available === true).filter((product: any) => product.categories.indexOf(categorieSelected) >= 0));
+        .map((data: any) => data.products.filter((product) => product.available === true).filter((product: any) => product.categories.toString().indexOf(categorySelected) >= 0));
     }
-    if (estate.toString() === '2') {
+    if (state.toString() === '2') {
       return this.http.get(environment.productsEnvoriment)
         // tslint:disable-next-line:max-line-length
-        .map((data: any) => data.products.filter((product) => product.available === false).filter((product: any) => product.categories.indexOf(categorieSelected) >= 0));
+        .map((data: any) => data.products.filter((product) => product.available === false).filter((product: any) => product.categories.toString().indexOf(categorySelected) >= 0));
     }
-    if (estate.toString() === '3') {
+    if (state.toString() === '3') {
       return this.http.get(environment.productsEnvoriment)
         // tslint:disable-next-line:max-line-length
-        .map((data: any) => data.products.filter((product) => product.bestSeller === true).filter((product: any) => product.categories.indexOf(categorieSelected) >= 0));
+        .map((data: any) => data.products.filter((product) => product.bestSeller === true).filter((product: any) => product.categories.toString().indexOf(categorySelected) >= 0));
     }
   }
 }

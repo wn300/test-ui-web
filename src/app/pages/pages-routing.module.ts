@@ -11,11 +11,11 @@ const routes: Routes = [
     component: IndexComponent
   },
   {
-    path: 'Shop-Mosaic/:Categoria/:Estado/:Producto',
+    path: 'Shop-Mosaic/:Category/:State/:Product',
     component: ShopMosaicComponent
   },
   {
-    path: 'Shop-list/:Categoria/:Estado/:Producto',
+    path: 'Shop-list/:Category/:State/:Product',
     component: ShopListComponent
   }
 ];
