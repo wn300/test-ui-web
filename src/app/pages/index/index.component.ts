@@ -12,9 +12,9 @@ export class IndexComponent implements OnInit {
   public categoiresSelect: Categories[] = [];
   public productsSelect: Products[] = [];
 
-  categoire: String = '-1';
-  estado: String = '-1';
-  producto: String = '-1';
+  categoire: String = '';
+  estado: String = '';
+  producto: String = '';
   path: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private serviceProducts: ShopProductsService) { }
@@ -27,9 +27,8 @@ export class IndexComponent implements OnInit {
       document.getElementById('li-shop').style.display = 'block';
       document.getElementById('li-shopping-basket').style.display = 'none';
     }
-
-    // tslint:disable-next-line:max-line-length
-    this.serviceProducts.getShopProducts().subscribe((data) => { this.categoiresSelect = data.categories; this.productsSelect = data.products; });
+    this.getAllCateogires();
+    this.getAllProducts();
   }
 
   search() {
@@ -37,6 +36,43 @@ export class IndexComponent implements OnInit {
   }
 
   changeCategories() {
-    // this.productsSelect.filter((product) => { product.id === this.producto });
+    if (this.categoire === '' && this.estado === '') {
+      this.getAllProducts();
+    }
+    if (this.categoire === '' && this.estado !== '') {
+      this.changeEstado();
+    }
+    if (this.categoire !== '' && this.estado === '') {
+      this.serviceProducts.getProductsForCategorie(this.categoire).subscribe((data) => { this.productsSelect = data; });
+    }
+    if (this.categoire !== '' && this.estado !== '') {
+      this.getProductsForCategorieAndEstate(this.categoire, this.estado);
+    }
   }
+
+  changeEstado() {
+    if (this.estado === '' && this.categoire === '') {
+      this.getAllProducts();
+    }
+    if (this.estado === '' && this.categoire !== '') {
+      this.changeCategories();
+    }
+    if (this.estado !== '' && this.categoire === '') {
+      this.serviceProducts.getProductsForEstate(this.estado).subscribe((data) => { this.productsSelect = data; });
+    }
+    if (this.estado !== '' && this.categoire !== '') {
+      this.getProductsForCategorieAndEstate(this.categoire, this.estado);
+    }
+  }
+
+  private getAllCateogires() {
+    this.serviceProducts.getAllCategories().subscribe((data) => { this.categoiresSelect = data; });
+  }
+  private getAllProducts() {
+    this.serviceProducts.getAllProducts().subscribe((data) => { this.productsSelect = data; });
+  }
+  private getProductsForCategorieAndEstate(categorieSelected: String, estate: String) {
+    this.serviceProducts.getProductsForCategorieAndState(categorieSelected, estate).subscribe((data) => { this.productsSelect = data; });
+  }
+
 }

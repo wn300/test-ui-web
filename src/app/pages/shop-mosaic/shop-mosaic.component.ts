@@ -21,7 +21,7 @@ export class ShopMosaicComponent implements OnInit {
       document.getElementById('li-shopping-basket').style.display = 'block';
     }
 
-    this.serviceProducts.getShopProducts().subscribe((data) => { console.log(data); });
+    this.serviceProducts.getAllProducts().subscribe((data) => { console.log(data); });
   }
 
 }
