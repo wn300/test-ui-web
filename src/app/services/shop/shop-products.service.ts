@@ -16,6 +16,11 @@ export class ShopProductsService {
       .map((data: any) => data.categories);
   }
 
+  getCategoriesById(id: String): Observable<any> {
+    return this.http.get(environment.productsEnvoriment)
+      .map((data: any) => data.categories.filter((category) => category.id.toString() === id));
+  }
+
   getAllProducts(): Observable<any> {
     return this.http.get(environment.productsEnvoriment)
       .map((data: any) => data.products);
