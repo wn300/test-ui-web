@@ -97,6 +97,10 @@ export class ShopMosaicComponent implements OnInit {
     });
   }
 
+  viewMore(product: Products) {
+    this.sharedServices.setviewMoreProduct(product);
+  }
+
   addShoppingCar(product: Products) {
     if (this.shoppingCar.filter((data) => data.id === product.id).length === 0) {
       this.shoppingCar.push({ id: product.id, name: product.name, price: product.price, img: product.img, quantity: 1 });

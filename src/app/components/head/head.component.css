@@ -34,6 +34,10 @@ nav {
         display: none;
     }
 
+    #a-hide{
+        display:none;
+    }
+
 @media only screen and (max-width: 1024px)  and (max-height: 1366px) {
     .txt-search{
         width: 600px !important;
@@ -50,12 +54,14 @@ nav {
     .txt-search{
         width: 480px !important;
     }
+  
 }
 
 @media only screen and (max-width: 768px) and (max-height: 420px) {
     .txt-search{
         width: 600px !important;
     }
+    
 }
 
 @media only screen and (max-width: 667px) and (max-height: 375px) {
@@ -65,6 +71,9 @@ nav {
     .txt-shoping-cart{
         display: block;
     }
+    #a-hide{
+        display:block;
+    }
 }
 
 @media only screen and (max-width: 420px) {
@@ -73,5 +82,8 @@ nav {
     }
     .txt-shoping-cart{
         display: block;
+    }
+    #a-hide{
+        display:block;
     }
 }

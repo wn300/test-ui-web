@@ -32,7 +32,7 @@
                   <span [hidden]="product.description.length < 70">...</span>
                 </p>
               </div>
-              <div class="text-center text-see-more">
+              <div class="text-center text-see-more" (click)="viewMore(product)">
                 Ver Mas
               </div>
               <div class="text-center">

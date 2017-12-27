@@ -9,6 +9,7 @@ export class SharedServicesService {
   searchHide: Subject<any> = new Subject<any>();
   productShoppingCart: Subject<any> = new Subject<any>();
   quantityProducts: Subject<any> = new Subject<any>();
+  viewMoreProduct: Subject<any> = new Subject<any>();
 
   constructor() { }
 
@@ -50,5 +51,13 @@ export class SharedServicesService {
 
   setquantityProducts(quantity: number) {
     return this.quantityProducts.next(quantity);
+  }
+
+  getviewMoreProduct() {
+    return this.viewMoreProduct;
+  }
+
+  setviewMoreProduct(product: Products) {
+    return this.viewMoreProduct.next(product);
   }
 }

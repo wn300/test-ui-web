@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedServicesService } from '../../services/shared/shared-services.service';
+import { Products } from '../../models/shop-products.models';
 
 @Component({
   selector: 'app-view-more',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-more.component.css']
 })
 export class ViewMoreComponent implements OnInit {
-
-  constructor() { }
+  public product: Products;
+  constructor(private sharedServices: SharedServicesService) { }
 
   ngOnInit() {
+    this.sharedServices.getviewMoreProduct()
+    .subscribe((data: any) => { this.product = data; document.getElementById('div-click-modal').click(); });
   }
 
 }
