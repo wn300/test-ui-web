@@ -5,6 +5,16 @@
     </div>
 
     <div class="col-12 col-lg-10 shop-shadow bg-products">
+      <div class="row justify-content-end" style="margin-top: 12px">
+        <div class="col-12 col-lg-4 col-md-3">
+          <select class="form-control" [(ngModel)]="sort" (change)="changeSortBy()">
+            <option value="">Ordenar Por</option>
+            <option [ngValue]="1">Nombre</option>
+            <option [ngValue]="2">Menor Precio</option>
+            <option [ngValue]="3">Mayor Precio</option>
+          </select>
+        </div>
+      </div>
       <div class="row">
         <div class="col-12 col-lg-3 col-md-4 margin-cards" *ngFor="let product of products">
           <div class="card">
@@ -23,7 +33,7 @@
                 </p>
               </div>
               <div class="text-center text-see-more">
-                Ver Mas               
+                Ver Mas
               </div>
               <div class="text-center">
                 <div class="text-price">

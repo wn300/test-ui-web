@@ -8,9 +8,8 @@
     <div class="navbar-collapse collapse justify-content-end" id="collapsingNavbar">
         <ul class="navbar-nav">
             <li id="li-search" class="align-self-center">
-                <form class="form-inline">
-                    <input class="form-control txt-search" type="search" placeholder="Buscar Producto" aria-label="Search">
-                </form>
+                <input id="text-search-products" class="form-control txt-search" type="search" placeholder="Buscar Producto" aria-label="Search" [(ngModel)]="filter"
+                    (keyup)="keyUpSearchProduct()">
             </li>
             <li id="li-shop" class="nav-item">
                 <a class="nav-link shop-text" (click)="enterShop()">Tienda

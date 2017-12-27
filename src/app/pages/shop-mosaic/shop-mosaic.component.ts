@@ -11,7 +11,10 @@ import { SharedServicesService } from '../../services/shared/shared-services.ser
 })
 export class ShopMosaicComponent implements OnInit {
   public products: Products[];
+  public productsSave: Products[];
   public filters: Filters[];
+
+  sort: String = '';
 
   path: string;
 
@@ -38,6 +41,12 @@ export class ShopMosaicComponent implements OnInit {
     }
 
     this.getProducts(category, state, product);
+
+    this.sharedServices.getSearchHide().subscribe((data: any) => {
+      if (data) {
+        this.sort = '';
+      }
+    });
 
     this.sharedServices.getFilterObject().subscribe((data: Filters[]) => {
       if (data.length > 0) {
@@ -81,7 +90,43 @@ export class ShopMosaicComponent implements OnInit {
       }
     });
 
+    this.sharedServices.getSearchProduct().subscribe((data: any) => {
+      this.products = this.productsSave.filter((prod: any) => prod.name.toUpperCase().indexOf(data.toUpperCase()) >= 0);
+    });
+  }
 
+  changeSortBy() {
+    switch (this.sort.toString()) {
+      case '1': {
+        this.products = this.products.sort(function (a, b) {
+          const nameA: String = a.name.toLowerCase();
+          const nameB: String = b.name.toLowerCase();
+
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+        });
+        break;
+      }
+      case '2': {
+        this.products = this.products.sort(function (a, b) {
+          return parseFloat(a.price) - parseFloat(b.price);
+        });
+        break;
+      }
+      case '3': {
+        this.products = this.products.sort(function (a, b) {
+          return parseFloat(b.price) - parseFloat(a.price);
+        });
+        break;
+      }
+      default: {
+        break;
+      }
+    }
   }
 
   private getProducts(Category: String, State: String, Product: String) {
@@ -114,78 +159,78 @@ export class ShopMosaicComponent implements OnInit {
   private getProductsFilters(Category: String, BestSeld: String, available: String, Price: String) {
     // all null
     if (Category === '' && BestSeld === '' && available === '' && Price === '') {
-      this.serviceProducts.getAllProducts().subscribe((data) => { this.products = data; });
+      this.serviceProducts.getAllProducts().subscribe((data) => { this.products = data; this.productsSave = data; });
     }
     // all not null
     if (Category !== '' && BestSeld !== '' && available !== '' && Price !== '') {
       this.serviceProducts.getProductsByPriceSellerAvailableCategory(Price.toString(), available.toString(), Category.toString())
-        .subscribe((data) => { this.products = data; });
+        .subscribe((data) => { this.products = data; this.productsSave = data; });
     }
 
     // one filter
     if (Category !== '' && BestSeld === '' && available === '' && Price === '') {
       this.serviceProducts.getProductsByCategory(Category)
-        .subscribe((productsFiltered) => { this.products = productsFiltered; });
+        .subscribe((productsFiltered) => { this.products = productsFiltered; this.productsSave = productsFiltered; });
     }
     if (Category === '' && BestSeld !== '' && available === '' && Price === '') {
       this.serviceProducts.getProductsByState(BestSeld)
-        .subscribe((productsFiltered) => { this.products = productsFiltered; });
+        .subscribe((productsFiltered) => { this.products = productsFiltered; this.productsSave = productsFiltered; });
     }
     if (Category === '' && BestSeld === '' && available !== '' && Price === '') {
       this.serviceProducts.getProductsByState(available)
-        .subscribe((productsFiltered) => { this.products = productsFiltered; });
+        .subscribe((productsFiltered) => { this.products = productsFiltered; this.productsSave = productsFiltered; });
     }
     if (Category === '' && BestSeld === '' && available === '' && Price !== '') {
       this.serviceProducts.getProductsByPrice(Price)
-        .subscribe((productsFiltered) => { this.products = productsFiltered; });
+        .subscribe((productsFiltered) => { this.products = productsFiltered; this.productsSave = productsFiltered; });
     }
 
     // two filter
     if (Category !== '' && BestSeld !== '' && available === '' && Price === '') {
       this.serviceProducts.getProductsByCategorySeller(Category.toString())
-        .subscribe((data) => { this.products = data; });
+        .subscribe((data) => { this.products = data; this.productsSave = data; });
     }
     if (Category !== '' && BestSeld === '' && available !== '' && Price === '') {
       this.serviceProducts.getProductsByCategoryAvailable(Category.toString(), available.toString())
-        .subscribe((data) => { this.products = data; });
+        .subscribe((data) => { this.products = data; this.productsSave = data; });
     }
     if (Category !== '' && BestSeld === '' && available === '' && Price !== '') {
       this.serviceProducts.getProductsByPriceCategory(Price.toString(), Category.toString())
-        .subscribe((data) => { this.products = data; });
+        .subscribe((data) => { this.products = data; this.productsSave = data; });
     }
     if (Category === '' && BestSeld !== '' && available !== '' && Price === '') {
       this.serviceProducts.getProductsBySellerAvailable(available.toString())
-        .subscribe((data) => { this.products = data; });
+        .subscribe((data) => { this.products = data; this.productsSave = data; });
     }
     if (Category === '' && BestSeld !== '' && available === '' && Price !== '') {
       this.serviceProducts.getProductsByPriceSeller(Price.toString())
-        .subscribe((data) => { this.products = data; });
+        .subscribe((data) => { this.products = data; this.productsSave = data; });
     }
 
     if (Category === '' && BestSeld === '' && available !== '' && Price !== '') {
       this.serviceProducts.getProductsByPriceAvailable(Price.toString(), available.toString())
-        .subscribe((data) => { this.products = data; });
+        .subscribe((data) => { this.products = data; this.productsSave = data; });
     }
 
     // tree filter
     if (Category !== '' && BestSeld !== '' && available !== '' && Price === '') {
       this.serviceProducts.getProductsBySellerAvailableCategory(available.toString(), Category.toString())
-        .subscribe((data) => { this.products = data; });
+        .subscribe((data) => { this.products = data; this.productsSave = data; });
     }
 
     if (Category === '' && BestSeld !== '' && available !== '' && Price !== '') {
       this.serviceProducts.getProductsByPriceSellerAvailable(Price.toString(), available.toString())
-        .subscribe((data) => { this.products = data; });
+        .subscribe((data) => { this.products = data; this.productsSave = data; });
     }
 
     if (Category !== '' && BestSeld === '' && available !== '' && Price !== '') {
       this.serviceProducts.getProductsByPriceAvailableCategory(Price.toString(), available.toString(), Category.toString())
-        .subscribe((data) => { this.products = data; });
+        .subscribe((data) => { this.products = data; this.productsSave = data; });
     }
 
     if (Category !== '' && BestSeld !== '' && available === '' && Price !== '') {
       this.serviceProducts.getProductsByPriceSellerCategory(Price.toString(), Category.toString())
-        .subscribe((data) => { this.products = data; });
+        .subscribe((data) => { this.products = data; this.productsSave = data; });
     }
   }
 }

@@ -58,7 +58,7 @@ export class ShopProductsService {
     return this.http.get(environment.productsEnvoriment)
       .map((data: any) => data.products
         .filter((categoriesFilter) => categoriesFilter.categories.toString().indexOf(category.toString()) >= 0)
-        .filter((bestSeldFil) => bestSeldFil.bestSeller === true);
+        .filter((bestSeldFil) => bestSeldFil.bestSeller === true));
   }
 
   getProductsByCategoryAvailable(category: string, available: string) {
@@ -158,7 +158,6 @@ export class ShopProductsService {
   }
 
   getProductsByPriceSeller(rank: string) {
-
     if (rank === '1') {
       return this.http.get(environment.productsEnvoriment)
         .map((data: any) => data.products

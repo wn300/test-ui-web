@@ -77,6 +77,8 @@ export class ShopFiltersComponent implements OnInit {
     this.categories.splice(this.categories.findIndex(categoryFilter => categoryFilter.id === category.id), 1);
     this.categoriesShow = 'hide';
     this.sharedServices.setFilterObject(this.filters);
+
+    this.sharedServices.setSearchHide(true);
   }
 
 
@@ -84,6 +86,8 @@ export class ShopFiltersComponent implements OnInit {
     this.filters.push({ id: 501, name: price, type: 'price' });
     this.price = 'filtrado';
     this.sharedServices.setFilterObject(this.filters);
+
+    this.sharedServices.setSearchHide(true);
   }
 
   addOtherFilter(other: string) {
@@ -111,6 +115,8 @@ export class ShopFiltersComponent implements OnInit {
     }
 
     this.sharedServices.setFilterObject(this.filters);
+
+    this.sharedServices.setSearchHide(true);
   }
 
   removeFilter(filter: Filters) {
@@ -157,6 +163,9 @@ export class ShopFiltersComponent implements OnInit {
       filtersNull.push({ id: 0, name: '', type: '' });
       this.sharedServices.setFilterObject(filtersNull);
     }
+
+    this.sharedServices.setSearchHide(true);
   }
+
 
 }
