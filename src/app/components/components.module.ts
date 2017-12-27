@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { HeadComponent } from './head/head.component';
 import { ShopFiltersComponent } from './shop-filters/shop-filters.component';
+import { CarShoppingComponent } from './car-shopping/car-shopping.component';
+import { ViewMoreComponent } from './view-more/view-more.component';
 
 @NgModule({
   imports: [
@@ -12,11 +14,15 @@ import { ShopFiltersComponent } from './shop-filters/shop-filters.component';
   ],
   declarations: [
     HeadComponent,
-    ShopFiltersComponent
+    ShopFiltersComponent,
+    CarShoppingComponent,
+    ViewMoreComponent,
   ],
   exports: [
     HeadComponent,
-    ShopFiltersComponent
+    ShopFiltersComponent,
+    CarShoppingComponent,
+    ViewMoreComponent,
   ]
 })
 export class ComponentsModule { }

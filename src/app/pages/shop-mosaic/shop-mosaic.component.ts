@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ShopProductsService } from '../../services/shop/shop-products.service';
-import { Products, Filters } from '../../models/shop-products.models';
+import { Products, Filters, ProductsShoppingCar } from '../../models/shop-products.models';
 import { SharedServicesService } from '../../services/shared/shared-services.service';
 
 @Component({
@@ -13,6 +13,8 @@ export class ShopMosaicComponent implements OnInit {
   public products: Products[];
   public productsSave: Products[];
   public filters: Filters[];
+
+  public shoppingCar: ProductsShoppingCar[] = [];
 
   sort: String = '';
 
@@ -95,8 +97,22 @@ export class ShopMosaicComponent implements OnInit {
     });
   }
 
+  addShoppingCar(product: Products) {
+    if (this.shoppingCar.filter((data) => data.id === product.id).length === 0) {
+      this.shoppingCar.push({ id: product.id, name: product.name, price: product.price, img: product.img, quantity: 1 });
+      this.sharedServices.setProductsShoppingCart(this.shoppingCar);
+      this.sharedServices.setquantityProducts(this.shoppingCar.length);
+    }
+  }
+
   changeSortBy() {
     switch (this.sort.toString()) {
+      case '': {
+        this.products = this.products.sort(function (a, b) {
+          return a.id - b.id;
+        });
+        break;
+      }
       case '1': {
         this.products = this.products.sort(function (a, b) {
           const nameA: String = a.name.toLowerCase();

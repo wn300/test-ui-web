@@ -20,3 +20,11 @@ export interface Filters {
     name: string;
     type: string;
 }
+
+export interface ProductsShoppingCar {
+    id: number;
+    name: string;
+    price: string;
+    img: string;
+    quantity: number;
+}

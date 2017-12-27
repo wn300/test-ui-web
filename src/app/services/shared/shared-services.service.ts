@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { Filters } from '../../models/shop-products.models';
+import { Filters, Products, ProductsShoppingCar } from '../../models/shop-products.models';
 
 @Injectable()
 export class SharedServicesService {
   filterExport: Subject<any> = new Subject<any>();
   searchExport: Subject<any> = new Subject<any>();
   searchHide: Subject<any> = new Subject<any>();
+  productShoppingCart: Subject<any> = new Subject<any>();
+  quantityProducts: Subject<any> = new Subject<any>();
 
   constructor() { }
 
@@ -32,5 +34,21 @@ export class SharedServicesService {
 
   setSearchHide(hide: Boolean) {
     return this.searchHide.next(hide);
+  }
+
+  getProductsShoppingCart() {
+    return this.productShoppingCart;
+  }
+
+  setProductsShoppingCart(products: ProductsShoppingCar[]) {
+    return this.productShoppingCart.next(products);
+  }
+
+  getquantityProducts() {
+    return this.quantityProducts;
+  }
+
+  setquantityProducts(quantity: number) {
+    return this.quantityProducts.next(quantity);
   }
 }

@@ -43,7 +43,7 @@
               <div class="text-center">
                 <div [ngSwitch]="product.available">
                   <div *ngSwitchCase="true">
-                    <div class="btn-add">
+                    <div class="btn-add" (click)="addShoppingCar(product)">
                       Agregar
                       <i class="fa fa-fw fa-shopping-cart"></i>
                     </div>

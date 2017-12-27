@@ -15,6 +15,7 @@ export class HeadComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private sharedServices: SharedServicesService) { }
 
   ngOnInit() {
+    this.sharedServices.getquantityProducts().subscribe((data: any) => { this.number = data; });
     this.sharedServices.getSearchHide().subscribe((data: any) => {
       if (data) {
         this.filter = '';
@@ -23,7 +24,7 @@ export class HeadComponent implements OnInit {
   }
 
   enterShop() {
-    this.router.navigate(['/Shop-Mosaic', '-1', '-1', '-1']);
+    this.router.navigate(['/Shop-Mosaic', '', '', '']);
   }
 
   keyUpSearchProduct() {
