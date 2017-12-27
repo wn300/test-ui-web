@@ -75,7 +75,7 @@ MIT
 MIT
 MIT
 
-@angular/core@5.1.2
+@angular/router@5.1.2
 MIT
 MIT
 
@@ -83,7 +83,7 @@ MIT
 MIT
 MIT
 
-@angular/router@5.1.2
+@angular/core@5.1.2
 MIT
 MIT
 
