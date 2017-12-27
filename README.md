@@ -2,6 +2,19 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
 
+# Cloning of repostorie and Install
+## Cloning
+
+to clone the repository in the command console enter `git init` and `git clone https://github.com/wn300/test-ui-web`.
+
+## To Install
+
+get in to the root folder of the repository `cd test-ui-web`.  
+if you do not have any installed angular cli version run `npm install -g @angular/cli`.
+now install the packages contained in the package.json with `npm install`.
+project execute on the bootstrap version `@4.0.0-alpha.6` and not the `@4.0.0-beta.2`
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
