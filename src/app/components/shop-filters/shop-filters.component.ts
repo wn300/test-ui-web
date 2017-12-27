@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ShopProductsService } from '../../services/shop/shop-products.service';
 import { Categories, Filters } from '../../models/shop-products.models';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SharedServicesService } from '../../services/shared/shared-services.service';
 
 @Component({
   selector: 'app-shop-filters',
@@ -12,12 +13,16 @@ export class ShopFiltersComponent implements OnInit {
   public categories: Categories[] = [];
   public filters: Filters[] = [];
 
+  categoriesShow: String = 'show';
   price: String = '';
   bestSeller: String = '';
   available: String = '';
   diabled: String = '';
 
-  constructor(private categoriesService: ShopProductsService, private route: ActivatedRoute, private router: Router) {
+  constructor(
+    private sharedServices: SharedServicesService,
+    private categoriesService: ShopProductsService,
+    private route: ActivatedRoute, private router: Router) {
 
   }
 
@@ -34,7 +39,8 @@ export class ShopFiltersComponent implements OnInit {
       this.categoriesService.getCategoriesById(category)
         // tslint:disable-next-line:max-line-length
         .subscribe((data: any) => { this.filters.push({ id: data[0].id, name: data[0].name, type: 'category' }); this.categories.splice(this.categories.findIndex(categoryFilter => categoryFilter.id === data[0].id), 1); });
-
+      this.categoriesShow = 'hide';
+      this.sharedServices.setFilterObject(this.filters);
     }
 
     if (state !== '') {
@@ -64,36 +70,20 @@ export class ShopFiltersComponent implements OnInit {
         }
       }
     }
-
   }
 
   addCategoryFilter(category: Categories) {
     this.filters.push({ id: category.id, name: category.name, type: 'category' });
     this.categories.splice(this.categories.findIndex(categoryFilter => categoryFilter.id === category.id), 1);
+    this.categoriesShow = 'hide';
+    this.sharedServices.setFilterObject(this.filters);
   }
 
 
   addPriceFilter(price: string) {
     this.filters.push({ id: 501, name: price, type: 'price' });
     this.price = 'filtrado';
-    // switch (price) {
-    //   case 'Mayor de $30.000': {
-
-    //     break;
-    //   }
-    //   case 'De $10.000 a $30.000': {
-
-    //     break;
-    //   }
-    //   case 'Menor de $10.000': {
-
-    //     break;
-    //   }
-    //   default: {
-
-    //     break;
-    //   }
-    // }
+    this.sharedServices.setFilterObject(this.filters);
   }
 
   addOtherFilter(other: string) {
@@ -119,16 +109,23 @@ export class ShopFiltersComponent implements OnInit {
         break;
       }
     }
+
+    this.sharedServices.setFilterObject(this.filters);
   }
 
   removeFilter(filter: Filters) {
     if (filter.type === 'category') {
       this.categories.push({ id: filter.id, name: filter.name });
       this.filters.splice(this.filters.findIndex(categoryFilter => categoryFilter.id === filter.id), 1);
+      this.categoriesShow = 'show';
+
+      this.sharedServices.setFilterObject(this.filters);
     }
     if (filter.type === 'price') {
       this.filters.splice(this.filters.findIndex(priceFilter => priceFilter.id === 501), 1);
       this.price = '';
+
+      this.sharedServices.setFilterObject(this.filters);
     }
     if (filter.type === 'other') {
       switch (filter.id.toString()) {
@@ -153,6 +150,12 @@ export class ShopFiltersComponent implements OnInit {
           break;
         }
       }
+      this.sharedServices.setFilterObject(this.filters);
+    }
+    if (this.filters.length === 0) {
+      const filtersNull: Filters[] = [];
+      filtersNull.push({ id: 0, name: '', type: '' });
+      this.sharedServices.setFilterObject(filtersNull);
     }
   }
 

@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ShopProductsService } from './services/shop/shop-products.service';
+import { SharedServicesService } from './services/shared/shared-services.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { ShopProductsService } from './services/shop/shop-products.service';
     ComponentsModule,
     PagesModule
   ],
-  providers: [ShopProductsService],
+  providers: [ShopProductsService, SharedServicesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
